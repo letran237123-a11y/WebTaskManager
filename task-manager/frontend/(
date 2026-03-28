@@ -1,0 +1,9 @@
+import React from 'react'
+
+const FILTERS = [
+  { value: 'all', label: 'All' },
+  { value: 'done', label: 'Done' },
+  { value: 'pending', label: 'Pending' },
+]
+
+const FilterBar = ({ filter, onFilterChange, search, onSearchChange }

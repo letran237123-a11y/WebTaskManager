@@ -1,0 +1,22 @@
+CREATE TABLE users (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  username NVARCHAR(100) NOT NULL UNIQUE,
+  email NVARCHAR(255) NOT NULL UNIQUE,
+  password_hash NVARCHAR(255) NOT NULL,
+  role VARCHAR(32) NOT NULL DEFAULT 'user',
+  created_at DATETIME2 NOT NULL DEFAULT GETDATE()
+);
+
+CREATE TABLE tasks (
+  id INT IDENTITY(1,1) PRIMARY KEY,
+  title NVARCHAR(255) NOT NULL,
+  status VARCHAR(10) NOT NULL DEFAULT 'pending',
+  priority VARCHAR(10) NOT NULL DEFAULT 'low',
+  deadline DATETIME2 NULL,
+  deadline_note NVARCHAR(MAX) NULL,
+  deadline_image NVARCHAR(MAX) NULL,
+  completed_at DATETIME2 NULL,
+  user_id INT NOT NULL,
+  created_at DATETIME2 NOT NULL DEFAULT GETDATE(),
+  CONSTRAINT FK_tasks_users FOREIGN KEY (user_id) REFERENCES users(id)
+);
